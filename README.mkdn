@@ -3,8 +3,29 @@ Tomber
 
 Description
 -----------
-Tomber is a python Wrapper for [Tomb](https://github.com/dyne/Tomb)
+Tomber is a python Wrapper for [Tomb](https://github.com/dyne/Tomb).
+
 Note that this project is still being developed, so any contributing will is welcome
+
+Example usage
+-------------
+
+    from tomber import *
+
+    # dig a tomb of 20mb
+    tdig('test.tomb',20)
+
+    # forge a key
+    tforge('test.key', 'this is the passphrase for the key')
+
+    # lock the tomb
+    tlock('test.tomb', 'test.key', 'this is the passphrase for the key')
+
+    # open the tomb
+    topen('test.tomb', 'test.key', 'this is the passphrase for the key', '/tmp/tomb')
+
+    # close the tomb
+    tclose('test')
 
 
 License
