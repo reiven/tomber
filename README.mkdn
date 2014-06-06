@@ -1,0 +1,17 @@
+Tomber
+=========
+
+Description
+-----------
+Tomber is a python Wrapper for [Tomb](https://github.com/dyne/Tomb)
+Note that this project is still being developed, so any contributing will is welcome
+
+
+License
+-------
+This package is distributed under BSD License. See also [LICENSE](https://github.com/reiven/pynientos/blob/master/LICENSE)  
+
+
+----------------------------------------------------------------
+For bug report, feedback, or any other reasons:
+Federico Reiven <reiven AT gmail DOT com>
