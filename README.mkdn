@@ -5,7 +5,9 @@ Description
 -----------
 Tomber is a python Wrapper for [Tomb](https://github.com/dyne/Tomb).
 
-Note that this project is still being developed, so any contributing will is welcome
+Note that this project is still being developed, so any contributing will is welcome.
+
+To speedup forge, install an entropy generator like [haveged](http://www.issihosts.com/haveged/)
 
 Example usage
 -------------

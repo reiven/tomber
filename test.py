@@ -5,9 +5,6 @@ from random import randrange
 
 
 class tomberTester(unittest.TestCase):
-    """
-    To speedup forge, install an entropy generator like 'haveged'
-    """
 
     @classmethod
     def setUpClass(self):

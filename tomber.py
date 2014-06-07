@@ -1,8 +1,6 @@
 from subprocess import Popen, PIPE
 from tools import parser
 
-# report returned status error trying to mount an already mounted device
-
 
 def get_message(stderr, type):
     response = []
@@ -16,7 +14,7 @@ def get_message(stderr, type):
 
 def execute(cmd):
     """
-    execute given cmd, and return boolean based on exit status
+    execute given cmd. return boolean based on exit status and error string
     """
     p = Popen(cmd, stdout=PIPE, stderr=PIPE, shell=True)
     stdout, stderr = p.communicate()
