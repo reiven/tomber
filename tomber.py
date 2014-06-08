@@ -77,3 +77,20 @@ def topen(tombfile, keyfile, passphrase, mountpath=False):
 def tclose(tombfile):
     cmd = ' '.join(['tomb', 'close', tombfile, '--no-color'])
     return execute(cmd)
+
+
+# waiting for fix on resize exit status
+def tresize(tombfile, keyfile, passphrase, newsize):
+    passphrase = ''.join(['"', passphrase, '"'])
+    cmd = ' '.join(['tomb',
+        'resize',
+        tombfile,
+        '-k',
+        keyfile,
+        '--unsecure-dev-mode',
+        '--tomb-pwd',
+        passphrase,
+        '-s',
+        str(newsize),
+        '--no-color'])
+    return execute(cmd)

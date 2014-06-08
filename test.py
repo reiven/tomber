@@ -36,5 +36,10 @@ class tomberTester(unittest.TestCase):
     def test_05_close(self):
         self.assertTrue(tclose(self.tombfile.split('.')[0]))
 
+    def test_06_resize(self):
+        self.assertTrue(tresize(
+            self.tombfile, self.keyfile, self.passphrase, 12
+            ))
+
 if __name__ == '__main__':
     unittest.main()
