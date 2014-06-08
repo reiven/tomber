@@ -3,6 +3,9 @@ from tools import parser
 
 
 def get_message(stderr, type):
+    """
+    used to return exit messages from command execution
+    """
     response = []
     for line in stderr.split('\n'):
         ret = parser.parse_line(line)
@@ -79,7 +82,6 @@ def tclose(tombfile):
     return execute(cmd)
 
 
-# waiting for fix on resize exit status
 def tresize(tombfile, keyfile, passphrase, newsize):
     passphrase = ''.join(['"', passphrase, '"'])
     cmd = ' '.join(['tomb',
@@ -92,5 +94,33 @@ def tresize(tombfile, keyfile, passphrase, newsize):
         passphrase,
         '-s',
         str(newsize),
+        '--no-color'])
+    return execute(cmd)
+
+
+def tbury(keyfile, passphrase, imagefile):
+    passphrase = ''.join(['"', passphrase, '"'])
+    cmd = ' '.join(['tomb',
+        'bury',
+        '-k',
+        keyfile,
+        '--unsecure-dev-mode',
+        '--tomb-pwd',
+        passphrase,
+        imagefile,
+        '--no-color'])
+    return execute(cmd)
+
+
+def texhume(keyfile, passphrase, imagefile):
+    passphrase = ''.join(['"', passphrase, '"'])
+    cmd = ' '.join(['tomb',
+        'exhume',
+        '-k',
+        keyfile,
+        '--unsecure-dev-mode',
+        '--tomb-pwd',
+        passphrase,
+        imagefile,
         '--no-color'])
     return execute(cmd)

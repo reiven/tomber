@@ -6,8 +6,10 @@ Description
 Tomber is a python Wrapper for [Tomb](https://github.com/dyne/Tomb).
 
 Note that this project is still being developed, so any contributing will is welcome.
+To run tests, you will need PIL (sudo pip install pil) for bury/exhume functions
 
-To speedup forge, install an entropy generator like [haveged](http://www.issihosts.com/haveged/)
+To speedup forge, install an entropy generator like [haveged](http://www.issihosts.com/haveged/).
+
 
 Example usage
 -------------
