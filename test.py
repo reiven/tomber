@@ -12,9 +12,10 @@ class tomberTester(unittest.TestCase):
         self.pid = str(os.getpid())
         self.tombfile = '.'.join([self.pid, 'tomb'])
         self.keyfile = '.'.join([self.pid, 'key'])
-        self.keyfile2 = '.'.join([self.pid, 'key2'])
+        self.keyfile2 = '.'.join([self.pid, '2ndkey'])
         self.mountpath = './tmptomb'
         self.passphrase = str(randrange(2 ** 64))
+        self.passphrase2 = str(randrange(2 ** 64))
         self.imagefile = '.'.join([self.pid, 'jpg'])
         self.createImage(self.imagefile)
 
@@ -28,7 +29,7 @@ class tomberTester(unittest.TestCase):
     @classmethod
     def createImage(self, imagefile):
         # create a 100x100 white image, to test bury and exhume
-        img = Image.new("RGB", (1200, 1200), (255, 255, 255))
+        img = Image.new("RGB", (1800, 1800), (255, 255, 255))
         img.save(imagefile)
 
     def test_01_dig(self):
@@ -53,11 +54,26 @@ class tomberTester(unittest.TestCase):
             self.tombfile, self.keyfile, self.passphrase, 12
             ))
 
-    def test_07_bury(self):
-        self.assertTrue(tbury(self.keyfile, self.passphrase, self.imagefile))
+    def test_07_passwd(self):
+        self.assertTrue(tpasswd(
+            self.keyfile, self.passphrase2, self.passphrase
+            ))
 
-    def test_08_exhume(self):
-        self.assertTrue(texhume(self.keyfile2, self.passphrase, self.imagefile))
+    def test_08_bury(self):
+        self.assertTrue(tbury(self.keyfile, self.passphrase2, self.imagefile))
+
+    def test_09_exhume(self):
+        self.assertTrue(texhume(self.keyfile, self.passphrase2, self.imagefile))
+
+    def test_10_setkey(self):
+        tforge(self.keyfile2, self.passphrase)
+        self.assertTrue(tsetkey(
+            self.keyfile,
+            self.tombfile,
+            self.keyfile2,
+            self.passphrase,
+            self.passphrase2
+            ))
 
 if __name__ == '__main__':
     unittest.main()

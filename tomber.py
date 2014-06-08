@@ -124,3 +124,36 @@ def texhume(keyfile, passphrase, imagefile):
         imagefile,
         '--no-color'])
     return execute(cmd)
+
+
+def tpasswd(keyfile, newpassphrase, oldpassphrase):
+    newpassphrase = ''.join(['"', newpassphrase, '"'])
+    oldpassphrase = ''.join(['"', oldpassphrase, '"'])
+    cmd = ' '.join(['tomb',
+        'passwd',
+        '-k',
+        keyfile,
+        '--unsecure-dev-mode',
+        '--tomb-pwd',
+        newpassphrase,
+        '--tomb-old-pwd',
+        oldpassphrase,
+        '--no-color'])
+    return execute(cmd)
+
+
+def tsetkey(oldkeyfile, tombfile, newkeyfile, newpassphrase, oldpassphrase):
+    newpassphrase = ''.join(['"', newpassphrase, '"'])
+    oldpassphrase = ''.join(['"', oldpassphrase, '"'])
+    cmd = ' '.join(['tomb',
+        'setkey',
+        oldkeyfile,
+        '-k',
+        newkeyfile,
+        '--unsecure-dev-mode',
+        '--tomb-pwd',
+        newpassphrase,
+        '--tomb-old-pwd',
+        oldpassphrase,
+        '--no-color'])
+    return execute(cmd)
