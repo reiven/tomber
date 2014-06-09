@@ -37,7 +37,7 @@ def sanitize_passphrase(passphrase):
 
 def tdig(tombfile, size):
     """
-    Usage: tdig <tombfilename> <size> - dig a tomb of given size
+    Dig a tomb of given size
     """
 
     cmd = ' '.join(['tomb', 'dig', tombfile, '-s', str(size), '--no-color'])
@@ -46,7 +46,7 @@ def tdig(tombfile, size):
 
 def tforge(keyfile, passphrase):
     """
-    Usage: tforge <keyfile> <passphrase> - forge a key with given passphrase
+    Forge a key with given passphrase
     """
     cmd = ' '.join(['tomb',
         'forge',
@@ -59,6 +59,9 @@ def tforge(keyfile, passphrase):
 
 
 def tlock(tombfile, keyfile, passphrase):
+    """
+    Lock a tomb file with given key and passphrase.
+    """
     cmd = ' '.join(['tomb',
         'lock',
         tombfile,
@@ -72,6 +75,10 @@ def tlock(tombfile, keyfile, passphrase):
 
 
 def topen(tombfile, keyfile, passphrase, mountpath=False):
+    """
+    Open (mount) a tomb.
+    Keyfile and passphrase are needed, mountpoint is optional
+    """
     if not mountpath:
         mountpath = ''
     cmd = ' '.join(['tomb',
@@ -88,11 +95,18 @@ def topen(tombfile, keyfile, passphrase, mountpath=False):
 
 
 def tclose(tombfile):
+    """
+    Close (umount) a tomb
+    """
     cmd = ' '.join(['tomb', 'close', tombfile, '--no-color'])
     return execute(cmd)
 
 
 def tresize(tombfile, keyfile, passphrase, newsize):
+    """
+    Resize a tomb.
+    Keyfile, passphrase and new size are needed.
+    """
     cmd = ' '.join(['tomb',
         'resize',
         tombfile,
@@ -108,6 +122,9 @@ def tresize(tombfile, keyfile, passphrase, newsize):
 
 
 def tbury(keyfile, passphrase, imagefile):
+    """
+    Bury a key inside a jpg file
+    """
     cmd = ' '.join(['tomb',
         'bury',
         '-k',
@@ -121,6 +138,9 @@ def tbury(keyfile, passphrase, imagefile):
 
 
 def texhume(keyfile, passphrase, imagefile):
+    """
+    Exhume (recover) key from jpg file. Passphrase for key is needed
+    """
     cmd = ' '.join(['tomb',
         'exhume',
         '-k',
@@ -134,6 +154,9 @@ def texhume(keyfile, passphrase, imagefile):
 
 
 def tpasswd(keyfile, newpassphrase, oldpassphrase):
+    """
+    Change current passphrase from keyfile
+    """
     cmd = ' '.join(['tomb',
         'passwd',
         '-k',
@@ -148,6 +171,10 @@ def tpasswd(keyfile, newpassphrase, oldpassphrase):
 
 
 def tsetkey(oldkeyfile, tombfile, newkeyfile, newpassphrase, oldpassphrase):
+    """
+    Change lock key for a tomb
+    The old key+passphrase and new key+passphrase are needed
+    """
     cmd = ' '.join(['tomb',
         'setkey',
         oldkeyfile,
