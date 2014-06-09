@@ -28,26 +28,37 @@ def execute(cmd):
         return False, get_message(stderr, 'error')
 
 
+def sanitize_passphrase(passphrase):
+    """
+    Used to avoid errors with passphrase which includes spaces
+    """
+    return ''.join(['"', passphrase, '"'])
+
+
 def tdig(tombfile, size):
+    """
+    Usage: tdig <tombfilename> <size> - dig a tomb of given size
+    """
+
     cmd = ' '.join(['tomb', 'dig', tombfile, '-s', str(size), '--no-color'])
     return execute(cmd)
 
 
 def tforge(keyfile, passphrase):
-    # avoid errors with spaces in passphrase
-    passphrase = ''.join(['"', passphrase, '"'])
+    """
+    Usage: tforge <keyfile> <passphrase> - forge a key with given passphrase
+    """
     cmd = ' '.join(['tomb',
         'forge',
         keyfile,
         '--unsecure-dev-mode',
         '--tomb-pwd',
-        passphrase,
+        sanitize_passphrase(passphrase),
         '--no-color'])
     return execute(cmd)
 
 
 def tlock(tombfile, keyfile, passphrase):
-    passphrase = ''.join(['"', passphrase, '"'])
     cmd = ' '.join(['tomb',
         'lock',
         tombfile,
@@ -55,13 +66,12 @@ def tlock(tombfile, keyfile, passphrase):
         keyfile,
         '--unsecure-dev-mode',
         '--tomb-pwd',
-        passphrase,
+        sanitize_passphrase(passphrase),
         '--no-color'])
     return execute(cmd)
 
 
 def topen(tombfile, keyfile, passphrase, mountpath=False):
-    passphrase = ''.join(['"', passphrase, '"'])
     if not mountpath:
         mountpath = ''
     cmd = ' '.join(['tomb',
@@ -71,7 +81,7 @@ def topen(tombfile, keyfile, passphrase, mountpath=False):
         keyfile,
         '--unsecure-dev-mode',
         '--tomb-pwd',
-        passphrase,
+        sanitize_passphrase(passphrase),
         '--no-color',
         mountpath])
     return execute(cmd)
@@ -83,7 +93,6 @@ def tclose(tombfile):
 
 
 def tresize(tombfile, keyfile, passphrase, newsize):
-    passphrase = ''.join(['"', passphrase, '"'])
     cmd = ' '.join(['tomb',
         'resize',
         tombfile,
@@ -91,7 +100,7 @@ def tresize(tombfile, keyfile, passphrase, newsize):
         keyfile,
         '--unsecure-dev-mode',
         '--tomb-pwd',
-        passphrase,
+        sanitize_passphrase(passphrase),
         '-s',
         str(newsize),
         '--no-color'])
@@ -99,52 +108,46 @@ def tresize(tombfile, keyfile, passphrase, newsize):
 
 
 def tbury(keyfile, passphrase, imagefile):
-    passphrase = ''.join(['"', passphrase, '"'])
     cmd = ' '.join(['tomb',
         'bury',
         '-k',
         keyfile,
         '--unsecure-dev-mode',
         '--tomb-pwd',
-        passphrase,
+        sanitize_passphrase(passphrase),
         imagefile,
         '--no-color'])
     return execute(cmd)
 
 
 def texhume(keyfile, passphrase, imagefile):
-    passphrase = ''.join(['"', passphrase, '"'])
     cmd = ' '.join(['tomb',
         'exhume',
         '-k',
         keyfile,
         '--unsecure-dev-mode',
         '--tomb-pwd',
-        passphrase,
+        sanitize_passphrase(passphrase),
         imagefile,
         '--no-color'])
     return execute(cmd)
 
 
 def tpasswd(keyfile, newpassphrase, oldpassphrase):
-    newpassphrase = ''.join(['"', newpassphrase, '"'])
-    oldpassphrase = ''.join(['"', oldpassphrase, '"'])
     cmd = ' '.join(['tomb',
         'passwd',
         '-k',
         keyfile,
         '--unsecure-dev-mode',
         '--tomb-pwd',
-        newpassphrase,
+        sanitize_passphrase(newpassphrase),
         '--tomb-old-pwd',
-        oldpassphrase,
+        sanitize_passphrase(oldpassphrase),
         '--no-color'])
     return execute(cmd)
 
 
 def tsetkey(oldkeyfile, tombfile, newkeyfile, newpassphrase, oldpassphrase):
-    newpassphrase = ''.join(['"', newpassphrase, '"'])
-    oldpassphrase = ''.join(['"', oldpassphrase, '"'])
     cmd = ' '.join(['tomb',
         'setkey',
         oldkeyfile,
@@ -152,8 +155,8 @@ def tsetkey(oldkeyfile, tombfile, newkeyfile, newpassphrase, oldpassphrase):
         newkeyfile,
         '--unsecure-dev-mode',
         '--tomb-pwd',
-        newpassphrase,
+        sanitize_passphrase(newpassphrase),
         '--tomb-old-pwd',
-        oldpassphrase,
+        sanitize_passphrase(oldpassphrase),
         '--no-color'])
     return execute(cmd)

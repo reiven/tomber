@@ -14,7 +14,8 @@ class tomberTester(unittest.TestCase):
         self.keyfile = '.'.join([self.pid, 'key'])
         self.keyfile2 = '.'.join([self.pid, '2ndkey'])
         self.mountpath = './tmptomb'
-        self.passphrase = str(randrange(2 ** 64))
+        # generate a passphrase with spaces
+        self.passphrase = str(randrange(2 ** 64)).replace("", " ")[1:-1]
         self.passphrase2 = str(randrange(2 ** 64))
         self.imagefile = '.'.join([self.pid, 'jpg'])
         self.createImage(self.imagefile)
