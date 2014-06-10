@@ -187,3 +187,8 @@ def tsetkey(oldkeyfile, tombfile, newkeyfile, newpassphrase, oldpassphrase):
         sanitize_passphrase(oldpassphrase),
         '--no-color'])
     return execute(cmd)
+
+
+def tslam():
+    cmd = ' '.join(['tomb', 'slam'])
+    return execute(cmd)

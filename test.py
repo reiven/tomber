@@ -76,5 +76,10 @@ class tomberTester(unittest.TestCase):
             self.passphrase2
             ))
 
+    def test_11_slam(self):
+        topen(self.tombfile, self.keyfile, self.passphrase2, self.mountpath)
+        self.assertTrue(tslam())
+
+
 if __name__ == '__main__':
     unittest.main()
