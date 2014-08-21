@@ -7,7 +7,7 @@ Tomber is a python Wrapper for [Tomb](https://github.com/dyne/Tomb).
 It relies on subprocess for tomb commands execution. Its inspired in pytomb with is actually included in Tomb extras.
 
 Note that this project is still being developed, so any contributing will is welcome.
-To run tests, you will need PIL (sudo pip install pil) for bury/exhume functions
+Included test.jpg file is used to test bury/exhume functions, so test do not create images with PIL anymore
 
 To speedup forge, install an entropy generator like [haveged](http://www.issihosts.com/haveged/).
 

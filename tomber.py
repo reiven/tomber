@@ -178,6 +178,7 @@ def tsetkey(oldkeyfile, tombfile, newkeyfile, newpassphrase, oldpassphrase):
     cmd = ' '.join(['tomb',
         'setkey',
         oldkeyfile,
+        tombfile,
         '-k',
         newkeyfile,
         '--unsecure-dev-mode',

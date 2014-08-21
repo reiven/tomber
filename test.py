@@ -2,7 +2,7 @@ import os
 import unittest
 from tomber import *
 from random import randrange
-import Image
+from shutil import rmtree, copyfile
 
 
 class tomberTester(unittest.TestCase):
@@ -13,12 +13,13 @@ class tomberTester(unittest.TestCase):
         self.tombfile = '.'.join([self.pid, 'tomb'])
         self.keyfile = '.'.join([self.pid, 'key'])
         self.keyfile2 = '.'.join([self.pid, '2ndkey'])
+        self.exhumedkey = '.'.join([self.pid, 'exhumed'])
         self.mountpath = './tmptomb'
         # generate a passphrase with spaces
         self.passphrase = str(randrange(2 ** 64)).replace("", " ")[1:-1]
         self.passphrase2 = str(randrange(2 ** 64))
         self.imagefile = '.'.join([self.pid, 'jpg'])
-        self.createImage(self.imagefile)
+        copyfile('test.jpg', self.imagefile)
 
     @classmethod
     def tearDownClass(self):
@@ -26,59 +27,75 @@ class tomberTester(unittest.TestCase):
         os.unlink(self.keyfile)
         os.unlink(self.keyfile2)
         os.unlink(self.imagefile)
-
-    @classmethod
-    def createImage(self, imagefile):
-        # create a 100x100 white image, to test bury and exhume
-        img = Image.new("RGB", (1800, 1800), (255, 255, 255))
-        img.save(imagefile)
+        os.unlink(self.exhumedkey)
+        rmtree(self.mountpath)
 
     def test_01_dig(self):
-        self.assertTrue(tdig(self.tombfile, 10))
+        """ Dig creating a 10mb file """
+        self.assertTrue(tdig(self.tombfile, 10)[0])
 
     def test_02_forge(self):
-        self.assertTrue(tforge(self.keyfile, self.passphrase))
+        """ Forge creating a keyfile and setting it a password """
+        self.assertTrue(tforge(self.keyfile, self.passphrase)[0])
 
     def test_03_lock(self):
-        self.assertTrue(tlock(self.tombfile, self.keyfile, self.passphrase))
+        """ Lock created tomb with forged keyfile """
+        self.assertTrue(tlock(self.tombfile, self.keyfile, self.passphrase)[0])
 
     def test_04_open(self):
+        """ Open the created tomb with forged keyfile"""
         self.assertTrue(topen(
-            self.tombfile, self.keyfile, self.passphrase, self.mountpath
-            ))
+                self.tombfile, self.keyfile, self.passphrase, self.mountpath
+                )[0]
+            )
 
     def test_05_close(self):
-        self.assertTrue(tclose(self.tombfile.split('.')[0]))
+        """ Close the mounted tomb """
+        self.assertTrue(tclose(self.tombfile.split('.')[0])[0])
 
     def test_06_resize(self):
+        """ Resize created tomb to 12mb """
         self.assertTrue(tresize(
-            self.tombfile, self.keyfile, self.passphrase, 12
-            ))
+                self.tombfile, self.keyfile, self.passphrase, 12
+                )[0]
+            )
 
     def test_07_passwd(self):
+        """ Change password in keyfile """
         self.assertTrue(tpasswd(
-            self.keyfile, self.passphrase2, self.passphrase
-            ))
+                self.keyfile, self.passphrase2, self.passphrase
+                )[0]
+            )
 
     def test_08_bury(self):
-        self.assertTrue(tbury(self.keyfile, self.passphrase2, self.imagefile))
+        """ Bury keyfile in a image file """
+        self.assertTrue(tbury(
+                self.keyfile, self.passphrase2, self.imagefile
+                )[0]
+            )
 
     def test_09_exhume(self):
-        self.assertTrue(texhume(self.keyfile, self.passphrase2, self.imagefile))
+        """ Exhume a key from an image """
+        self.assertTrue(texhume(
+                self.exhumedkey, self.passphrase2, self.imagefile
+                )[0]
+            )
 
     def test_10_setkey(self):
+        """ Set different keyfile to created tomb """
         tforge(self.keyfile2, self.passphrase)
         self.assertTrue(tsetkey(
-            self.keyfile,
-            self.tombfile,
-            self.keyfile2,
-            self.passphrase,
-            self.passphrase2
-            ))
+                self.keyfile,
+                self.tombfile,
+                self.keyfile2,
+                self.passphrase,
+                self.passphrase2
+                )[0]
+            )
 
     def test_11_slam(self):
         topen(self.tombfile, self.keyfile, self.passphrase2, self.mountpath)
-        self.assertTrue(tslam())
+        self.assertTrue(tslam()[0])
 
 
 if __name__ == '__main__':
