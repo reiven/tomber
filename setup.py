@@ -1,8 +1,4 @@
 #!/usr/bin/env python
-
-from distribute_setup import use_setuptools
-use_setuptools()
-
 import os
 from setuptools import setup, find_packages
 
@@ -19,7 +15,7 @@ requires = ['']
 setup(name='tomber',
     version='1.0.1',
     description='a python Tomb (the Crypto Undertaker) wrapper',
-    long_description=read('README.md'),
+    long_description=read('README.mkdn'),
     license="BSD",
     author='Federico Reiven',
     author_email='reiven@gmail.com',
