@@ -34,7 +34,7 @@ Example usage
 
 Running tests
 -------------
-A piece of advice: the included 'test' file execute Tomb.slam() command, so keep it can close you currently opened Tombs.
+A piece of advice: the included 'test' file execute Tomb.slam() command, so that probably will close you currently opened Tombs.
 
 
 License
