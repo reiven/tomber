@@ -9,7 +9,9 @@ _found_regex = re.compile(r'^\[m\]\[([^]]+)\] +(([^:]+)://(.+))$')
 #generic: programname, then some identifiers in square (or round) brackets,
 #then maybe something else, then a space, then the context
 _generic_regex = re.compile(r'^[a-z-]+ [[(]([^]]+)[\])] +(.+)$')
-types = {'E':'error', 'W':'warning', 'D':'debug', '*':'success'}
+types = {'E': 'error', 'W': 'warning', 'D': 'debug', '*': 'success'}
+
+
 def parse_line(line):
     '''Analyze a single line.
     Return None if no standard format is detected, a dict otherwise.
@@ -18,17 +20,14 @@ def parse_line(line):
     'type' can be 'error', 'progress'
     '''
 
-
     match = _found_regex.match(line)
     if match:
-        return { 'type': types.get(match.group(1)) or match.group(1),
+        return {'type': types.get(match.group(1)) or match.group(1),
                 'content': match.group(2), 'scheme': match.group(3),
-                'path': match.group(4) }
+                'path': match.group(4)}
     match = _generic_regex.search(line)
     if match:
-        return { 'type': types.get(match.group(1)) or match.group(1),
-                'content': match.group(2) }
+        return {'type': types.get(match.group(1)) or match.group(1),
+                'content': match.group(2)}
 
     return None
-
-

@@ -31,11 +31,11 @@ class tomberTester(unittest.TestCase):
         rmtree(self.mountpath)
 
     def test_01_dig(self):
-        """ Dig creating a 10mb file """
+        """ Dig a tomb of 10mb"""
         self.assertTrue(tdig(self.tombfile, 10)[0])
 
     def test_02_forge(self):
-        """ Forge creating a keyfile and setting it a password """
+        """ Forge a keyfile and set a passphrase """
         self.assertTrue(tforge(self.keyfile, self.passphrase)[0])
 
     def test_03_lock(self):
@@ -43,14 +43,14 @@ class tomberTester(unittest.TestCase):
         self.assertTrue(tlock(self.tombfile, self.keyfile, self.passphrase)[0])
 
     def test_04_open(self):
-        """ Open the created tomb with forged keyfile"""
+        """ Open the created tomb with forged keyfile and passhrase """
         self.assertTrue(topen(
                 self.tombfile, self.keyfile, self.passphrase, self.mountpath
                 )[0]
             )
 
     def test_05_close(self):
-        """ Close the mounted tomb """
+        """ Close the created tomb """
         self.assertTrue(tclose(self.tombfile.split('.')[0])[0])
 
     def test_06_resize(self):
@@ -82,7 +82,7 @@ class tomberTester(unittest.TestCase):
             )
 
     def test_10_setkey(self):
-        """ Set different keyfile to created tomb """
+        """ Forge a new key and and set different keyfile to created tomb """
         tforge(self.keyfile2, self.passphrase)
         self.assertTrue(tsetkey(
                 self.keyfile,
@@ -94,6 +94,7 @@ class tomberTester(unittest.TestCase):
             )
 
     def test_11_slam(self):
+        """ Slam open tombs """
         topen(self.tombfile, self.keyfile, self.passphrase2, self.mountpath)
         self.assertTrue(tslam()[0])
 

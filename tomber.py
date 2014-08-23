@@ -1,10 +1,23 @@
+# -*- coding: utf8 -*-
+
+"""
+
+tomber - a python Tomb (the Crypto Undertaker) wrapper
+To use tomber you need to install Tomb (https://github.com/dyne/Tomb)
+Copyright © 2014, Federico reiven <reiven_at_gmail.com>
+Licensed under BSD License.
+See also LICENSE file
+
+"""
+
+
 from subprocess import Popen, PIPE
 from tools import parser
 
 
 def get_message(stderr, type):
     """
-    used to return exit messages from command execution
+    Helper to return exit messages from command execution
     """
     response = []
     for line in stderr.split('\n'):
@@ -17,7 +30,7 @@ def get_message(stderr, type):
 
 def execute(cmd):
     """
-    execute given cmd. return boolean based on exit status and error string
+    Execute given cmd. return boolean based on exit status and error string
     """
     p = Popen(cmd, stdout=PIPE, stderr=PIPE, shell=True)
     stdout, stderr = p.communicate()
@@ -30,7 +43,7 @@ def execute(cmd):
 
 def sanitize_passphrase(passphrase):
     """
-    Used to avoid errors with passphrase which includes spaces
+    Used to avoid errors with passphrases which include spaces
     """
     return ''.join(['"', passphrase, '"'])
 
@@ -39,7 +52,6 @@ def tdig(tombfile, size):
     """
     Dig a tomb of given size
     """
-
     cmd = ' '.join(['tomb', 'dig', tombfile, '-s', str(size), '--no-color'])
     return execute(cmd)
 
@@ -191,5 +203,8 @@ def tsetkey(oldkeyfile, tombfile, newkeyfile, newpassphrase, oldpassphrase):
 
 
 def tslam():
+    """
+    Slam tombs, killing all programs using it
+    """
     cmd = ' '.join(['tomb', 'slam'])
     return execute(cmd)
