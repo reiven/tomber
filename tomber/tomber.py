@@ -48,11 +48,21 @@ def sanitize_passphrase(passphrase):
     return ''.join(['"', passphrase, '"'])
 
 
-def tdig(tombfile, size):
+def tdig(tombfile, size, force=False):
     """
     Dig a tomb of given size
     """
-    cmd = ' '.join(['tomb', 'dig', tombfile, '-s', str(size), '--no-color'])
+    if not force:
+        cmd = ' '.join(['tomb', 'dig', tombfile, '-s', str(size), '--no-color'])
+    else:
+        cmd = ' '.join([
+            'tomb',
+            'dig',
+            tombfile,
+            '-s',
+            str(size),
+            '--no-color',
+            '-f'])
     return execute(cmd)
 
 

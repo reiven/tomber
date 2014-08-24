@@ -9,7 +9,7 @@ install:
 - git clone https://github.com/dyne/Tomb && cd Tomb && sudo make install && cd ..
 - sudo swapoff -a
 # dig a test tomb
-- tomb dig test.tomb -s10
+- tomb dig test.tomb -s10 -f
 script:
 # Normal tests
 - nosetests -v
