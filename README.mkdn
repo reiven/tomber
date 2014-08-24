@@ -16,9 +16,11 @@ Instalation
 First of all, you need to install Tomb, so please refer to [Tomb Documentation](https://github.com/dyne/Tomb/blob/master/INSTALL.md)
 
 Then, you can install tomber from PyPi using pip
+
     pip install tomb
 
 Or you can clone this public repo
+
     git clone https://github.com/reiven/tomber
 
 
