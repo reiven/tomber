@@ -1,0 +1,22 @@
+language: python
+python:
+- "2.6"
+- "2.7"
+install:
+# Build/test dependencies
+- pip install -r requirements.txt
+- sudo apt-get update
+- sudo apt-get install -y zsh pinentry-curses steghide gnupg 
+- git clone https://github.com/dyne/Tomb
+- cd tomb
+- sudo make install
+script:
+# Normal tests
+- nosetests
+notifications:
+notifications:
+  email:
+    recipients:
+      - reiven@gmail.com
+    on_success: [always|never|change] # default: change
+    on_failure: [always|never|change] # default: always

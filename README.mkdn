@@ -11,6 +11,16 @@ Included test.jpg file is used to test bury/exhume functions, so test do not cre
 
 To speedup forge, install an entropy generator like [haveged](http://www.issihosts.com/haveged/).
 
+Instalation
+----------
+First of all, you need to install Tomb, so please refer to [Tomb Documentation](https://github.com/dyne/Tomb/blob/master/INSTALL.md)
+
+Then, you can install tomber from PyPi using pip
+    pip install tomb
+
+Or you can clone this public repo
+    git clone https://github.com/reiven/tomber
+
 
 Example usage
 -------------
