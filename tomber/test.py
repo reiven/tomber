@@ -19,7 +19,9 @@ class tomberTester(unittest.TestCase):
         self.passphrase = str(randrange(2 ** 64)).replace("", " ")[1:-1]
         self.passphrase2 = str(randrange(2 ** 64))
         self.imagefile = '.'.join([self.pid, 'jpg'])
-        copyfile('test.jpg', self.imagefile)
+        copyfile(
+            '/'.join([os.path.dirname(__file__), 'test.jpg']),
+            self.imagefile)
 
     @classmethod
     def tearDownClass(self):
@@ -97,7 +99,6 @@ class tomberTester(unittest.TestCase):
         """ Slam open tombs """
         topen(self.tombfile, self.keyfile, self.passphrase2, self.mountpath)
         self.assertTrue(tslam()[0])
-
 
 if __name__ == '__main__':
     unittest.main()
