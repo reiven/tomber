@@ -5,10 +5,13 @@ python:
 install:
 # Install dependencies
 - sudo apt-get update
-- sudo apt-get install -y zsh pinentry-curses steghide gnupg cryptsetup
+- sudo apt-get install -y zsh pinentry-curses steghide gnupg cryptsetup haveged
 - git clone https://github.com/dyne/Tomb && cd Tomb && sudo make install && cd ..
 # dig a test tomb
 - tomb dig test.tomb -s10 -f
+# forge a test key
+- tomb forge a.key --unsecure-dev-mode --tomb-pwd password --no-color -f
+- tomb lock test.tomb -k a.key --unsecure-dev-mode --tomb-pwd password
 script:
 # Normal tests
 - nosetests -v

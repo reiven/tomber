@@ -38,7 +38,7 @@ class tomberTester(unittest.TestCase):
 
     def test_02_forge(self):
         """ Forge a keyfile and set a passphrase """
-        self.assertTrue(tforge(self.keyfile, self.passphrase)[0])
+        self.assertTrue(tforge(self.keyfile, self.passphrase, force=True)[0])
 
     def test_03_lock(self):
         """ Lock created tomb with forged keyfile """

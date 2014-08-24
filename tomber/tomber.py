@@ -52,21 +52,13 @@ def tdig(tombfile, size, force=False):
     """
     Dig a tomb of given size
     """
-    if not force:
-        cmd = ' '.join(['tomb', 'dig', tombfile, '-s', str(size), '--no-color'])
-    else:
-        cmd = ' '.join([
-            'tomb',
-            'dig',
-            tombfile,
-            '-s',
-            str(size),
-            '--no-color',
-            '-f'])
+    cmd = ' '.join(['tomb', 'dig', tombfile, '-s', str(size), '--no-color'])
+    if force:
+        cmd += " -f"
     return execute(cmd)
 
 
-def tforge(keyfile, passphrase):
+def tforge(keyfile, passphrase, force=False):
     """
     Forge a key with given passphrase
     """
@@ -77,6 +69,8 @@ def tforge(keyfile, passphrase):
         '--tomb-pwd',
         sanitize_passphrase(passphrase),
         '--no-color'])
+    if force:
+        cmd += " -f"
     return execute(cmd)
 
 
