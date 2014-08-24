@@ -7,7 +7,7 @@ install:
 - sudo apt-get update
 - sudo apt-get install -y zsh pinentry-curses steghide gnupg 
 - git clone https://github.com/dyne/Tomb
-- cd tomb
+- cd Tomb
 - sudo make install
 script:
 # Normal tests
