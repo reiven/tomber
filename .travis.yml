@@ -7,9 +7,8 @@ install:
 - sudo apt-get update
 - sudo apt-get install -y zsh pinentry-curses steghide gnupg cryptsetup
 - git clone https://github.com/dyne/Tomb && cd Tomb && sudo make install && cd ..
-- pwd
-# check of Tomb was installed ok
-- tomb help
+- sudo swapoff -a
+# dig a test tomb
 - tomb dig test.tomb -s10
 script:
 # Normal tests
