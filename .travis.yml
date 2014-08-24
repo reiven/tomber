@@ -6,10 +6,11 @@ install:
 # Install dependencies
 - sudo apt-get update
 - sudo apt-get install -y zsh pinentry-curses steghide gnupg cryptsetup
-- git clone https://github.com/dyne/Tomb && cd Tomb && sudo make install
-- cd /home/travis/build/reiven/tomber
+- git clone https://github.com/dyne/Tomb && cd Tomb && sudo make install && cd ..
+- pwd
 # check of Tomb was installed ok
 - tomb help
+- tomb dig test.tomb -s10
 script:
 # Normal tests
 - nosetests -v
