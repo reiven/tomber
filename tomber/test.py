@@ -34,11 +34,11 @@ class tomberTester(unittest.TestCase):
 
     def test_01_dig(self):
         """ Dig a tomb of 10mb"""
-        self.assertTrue(tdig(self.tombfile, 10, force=True)[0])
+        self.assertTrue(tdig(self.tombfile, 10)[0])
 
     def test_02_forge(self):
         """ Forge a keyfile and set a passphrase """
-        self.assertTrue(tforge(self.keyfile, self.passphrase, force=True)[0])
+        self.assertTrue(tforge(self.keyfile, self.passphrase)[0])
 
     def test_03_lock(self):
         """ Lock created tomb with forged keyfile """

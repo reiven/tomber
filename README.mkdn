@@ -11,11 +11,6 @@ Included test.jpg file is used to test bury/exhume functions, so test do not cre
 
 To speedup forge, install an entropy generator like [haveged](http://www.issihosts.com/haveged/).
 
-Build status
-------------
-[![Build Status](https://travis-ci.org/reiven/tomber.svg?branch=master)](https://travis-ci.org/reiven/tomber)
-
-
 Instalation
 ----------
 First of all, you need to install Tomb, so please refer to [Tomb Documentation](https://github.com/dyne/Tomb/blob/master/INSTALL.md)
