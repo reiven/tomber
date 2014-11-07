@@ -3,23 +3,35 @@ Tomber
 
 Description
 -----------
-Tomber is a python Wrapper for [Tomb](https://github.com/dyne/Tomb).
-It relies on subprocess for tomb commands execution. Its inspired in pytomb with is actually included in Tomb extras.
 
-Note that this project is still being developed, so any contributing will is welcome.
-Included test.jpg file is used to test bury/exhume functions, so test do not create images with PIL anymore
+Tomber is a python wrapper for [Tomb](https://github.com/dyne/Tomb).
+It relies on Python's subprocess module for tomb commands
+execution. This project was inspired by pytomb which was included in
+Tomb extras in the past.
 
-To speedup forge, install an entropy generator like [haveged](http://www.issihosts.com/haveged/).
+Note that this project is still being developed. Any contribution is
+welcomed. The included test.jpg file is used to test the bury and
+exhume functions. That said, the bury and exhume functions do not
+create images with PIL anymore.
 
-Instalation
+To speedup forge, an entropy generator such as
+[haveged](http://www.issihosts.com/haveged/) can be installed.
+
+Installation
 ----------
-First of all, you need to install Tomb, so please refer to [Tomb Documentation](https://github.com/dyne/Tomb/blob/master/INSTALL.md)
 
-Then, you can install tomber from PyPi using pip
+Firstly, you need to install Tomb. Please refer to
+[Tomb Documentation](https://github.com/dyne/Tomb/blob/master/INSTALL.md)
+to get Tomb installed on your system.
+
+Secondly, Tomber can be installed from
+[PyPi](https://pypi.python.org/pypi) using pip by entering the
+following command into terminal:
 
     pip install tomb
 
-Or you can clone this public repo
+Or you can clone this public repository by entering the following
+command into terminal.
 
     git clone https://github.com/reiven/tomber
 
@@ -46,14 +58,19 @@ Example usage
 
 Running tests
 -------------
-A piece of advice: the included 'test' file execute Tomb.slam() command, so that probably will close you currently opened Tombs.
+
+A piece of advice: the included *test* file execute the `Tomb.slam()`
+command which will likely close any Tombs you may have open.
 
 
 License
 -------
-This package is distributed under BSD License. See also [LICENSE](https://github.com/reiven/pynientos/blob/master/LICENSE)  
+
+This package is distributed under BSD License.
+See [LICENSE](https://github.com/reiven/pynientos/blob/master/LICENSE)  
 
 
 ----------------------------------------------------------------
+
 For bug report, feedback, or any other reasons:
 Federico Reiven <reiven AT gmail DOT com>
