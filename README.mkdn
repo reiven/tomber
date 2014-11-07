@@ -23,11 +23,11 @@ To speedup forge, an entropy generator such as
 Installation
 ----------
 
-First Tomb must be installed. Please refer to the
+First, Tomb must be installed. Please refer to the
 [Tomb documentation](https://github.com/dyne/Tomb/blob/master/INSTALL.md)
 to get Tomb installed on your system.
 
-Second tomber must be installed. Tomber can be installed from
+Second, tomber must be installed. Tomber can be installed from
 [PyPi](https://pypi.python.org/pypi) using
 [pip](https://pypi.python.org/pypi/pip). Enter the following command
 into terminal:
