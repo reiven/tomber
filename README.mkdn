@@ -42,24 +42,24 @@ command into terminal.
 
 Example usage
 -------------
+```python
+from tomber import *
 
-	from tomber import *
+# dig a tomb of 20mb
+tdig('test.tomb',20)
 
-	# dig a tomb of 20mb
-	tdig('test.tomb',20)
+# forge a key
+tforge('test.key', 'this is the passphrase for the key')
 
-	# forge a key
-	tforge('test.key', 'this is the passphrase for the key')
+# lock the tomb
+tlock('test.tomb', 'test.key', 'this is the passphrase for the key')
 
-	# lock the tomb
-	tlock('test.tomb', 'test.key', 'this is the passphrase for the key')
+# open the tomb
+topen('test.tomb', 'test.key', 'this is the passphrase for the key', '/tmp/tomb')
 
-	# open the tomb
-	topen('test.tomb', 'test.key', 'this is the passphrase for the key', '/tmp/tomb')
-
-	# close the tomb
-	tclose('test')
-
+# close the tomb
+tclose('test')
+```
 
 Running tests
 -------------
@@ -75,8 +75,3 @@ License
 This package is distributed under BSD License.
 See [LICENSE](https://github.com/reiven/pynientos/blob/master/LICENSE)
 
-
-----------------------------------------------------------------
-
-For bug report, feedback, or any other reasons:
-Federico Reiven <reiven AT gmail DOT com>
