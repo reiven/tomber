@@ -32,7 +32,7 @@ def execute(cmd):
     """
     Execute given cmd. return boolean based on exit status and error string
     """
-    p = Popen(cmd, stdout=PIPE, stderr=PIPE, shell=True)
+    p = Popen(cmd.split(), stdout=PIPE, stderr=PIPE)
     stdout, stderr = p.communicate()
     p_status = p.wait()
     if p_status == 0:
