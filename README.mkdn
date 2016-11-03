@@ -10,14 +10,19 @@ It relies on Python's subprocess module for Tomb command
 execution. This project was inspired by pytomb which was included in
 Tomb ./extras in the past but is no longer maintained.
 
-This project is still under development. Any contributions are
-greatly welcomed.
-
 The included test.jpg image file is used to test the `tbury()` and
 `texhume()` functions.
 
 To speedup forge, an entropy generator such as
 [haveged](http://www.issihosts.com/haveged/) can be installed.
+
+
+Compatibity
+----------
+
+Current version requieres at least Tomb v2.2 to run.
+If for any reason you need to use older Tomb version with tomber, please
+install tomber v1.0.2
 
 
 Installation

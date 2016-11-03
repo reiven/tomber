@@ -20,7 +20,7 @@ class tomberTester(unittest.TestCase):
         self.passphrase2 = str(randrange(2 ** 64))
         self.imagefile = '.'.join([self.pid, 'jpg'])
         copyfile(
-            '/'.join([os.path.dirname(__file__), 'test.jpg']),
+            '/'.join([os.path.dirname(os.path.abspath(__file__)), 'test.jpg']),
             self.imagefile)
 
     @classmethod
