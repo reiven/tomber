@@ -13,7 +13,7 @@ requires = ['']
 
 
 setup(name='tomber',
-    version='1.0.3',
+    version='1.0.4',
     description='a python Tomb (the Crypto Undertaker) wrapper',
     long_description=read('README.mkdn'),
     license="BSD",
