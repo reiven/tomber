@@ -32,7 +32,7 @@ def execute(cmd):
     """
     Execute given cmd. return boolean based on exit status and error string
     """
-    p = Popen(cmd.split(), stdout=PIPE, stderr=PIPE)
+    p = Popen(cmd, stdout=PIPE, stderr=PIPE)
     stdout, stderr = p.communicate()
     p_status = p.wait()
     if p_status == 0:
@@ -45,16 +45,16 @@ def sanitize_passphrase(passphrase):
     """
     Used to avoid errors with passphrases which include spaces
     """
-    return ''.join(['"', passphrase, '"'])
+    return passphrase
 
 
 def tdig(tombfile, size, force=False):
     """
     Dig a tomb of given size
     """
-    cmd = ' '.join(['tomb', 'dig', tombfile, '-s', str(size), '--no-color'])
+    cmd = ['tomb', 'dig', tombfile, '-s', str(size), '--no-color']
     if force:
-        cmd += " -f"
+        cmd += ["-f"]
     return execute(cmd)
 
 
@@ -62,15 +62,15 @@ def tforge(keyfile, passphrase, force=False):
     """
     Forge a key with given passphrase
     """
-    cmd = ' '.join(['tomb',
+    cmd = ['tomb',
         'forge',
         keyfile,
         '--unsafe',
         '--tomb-pwd',
         sanitize_passphrase(passphrase),
-        '--no-color'])
+        '--no-color']
     if force:
-        cmd += " -f"
+        cmd += ["-f"]
     return execute(cmd)
 
 
@@ -78,7 +78,7 @@ def tlock(tombfile, keyfile, passphrase):
     """
     Lock a tomb file with given key and passphrase.
     """
-    cmd = ' '.join(['tomb',
+    cmd = ['tomb',
         'lock',
         tombfile,
         '-k',
@@ -86,7 +86,7 @@ def tlock(tombfile, keyfile, passphrase):
         '--unsafe',
         '--tomb-pwd',
         sanitize_passphrase(passphrase),
-        '--no-color'])
+        '--no-color']
     return execute(cmd)
 
 
@@ -97,7 +97,7 @@ def topen(tombfile, keyfile, passphrase, mountpath=False):
     """
     if not mountpath:
         mountpath = ''
-    cmd = ' '.join(['tomb',
+    cmd = ['tomb',
         'open',
         tombfile,
         '-k',
@@ -106,7 +106,7 @@ def topen(tombfile, keyfile, passphrase, mountpath=False):
         '--tomb-pwd',
         sanitize_passphrase(passphrase),
         '--no-color',
-        mountpath])
+        mountpath]
     return execute(cmd)
 
 
@@ -114,7 +114,7 @@ def tclose(tombfile):
     """
     Close (umount) a tomb
     """
-    cmd = ' '.join(['tomb', 'close', tombfile, '--no-color'])
+    cmd = ['tomb', 'close', tombfile, '--no-color']
     return execute(cmd)
 
 
@@ -123,7 +123,7 @@ def tresize(tombfile, keyfile, passphrase, newsize):
     Resize a tomb.
     Keyfile, passphrase and new size are needed.
     """
-    cmd = ' '.join(['tomb',
+    cmd = ['tomb',
         'resize',
         tombfile,
         '-k',
@@ -133,7 +133,7 @@ def tresize(tombfile, keyfile, passphrase, newsize):
         sanitize_passphrase(passphrase),
         '-s',
         str(newsize),
-        '--no-color'])
+        '--no-color']
     return execute(cmd)
 
 
@@ -141,7 +141,7 @@ def tbury(keyfile, passphrase, imagefile):
     """
     Bury a key inside a jpg file
     """
-    cmd = ' '.join(['tomb',
+    cmd = ['tomb',
         'bury',
         '-k',
         keyfile,
@@ -149,7 +149,7 @@ def tbury(keyfile, passphrase, imagefile):
         '--tomb-pwd',
         sanitize_passphrase(passphrase),
         imagefile,
-        '--no-color'])
+        '--no-color']
     return execute(cmd)
 
 
@@ -157,7 +157,7 @@ def texhume(keyfile, passphrase, imagefile):
     """
     Exhume (recover) key from jpg file. Passphrase for key is needed
     """
-    cmd = ' '.join(['tomb',
+    cmd = ['tomb',
         'exhume',
         '-k',
         keyfile,
@@ -165,7 +165,7 @@ def texhume(keyfile, passphrase, imagefile):
         '--tomb-pwd',
         sanitize_passphrase(passphrase),
         imagefile,
-        '--no-color'])
+        '--no-color']
     return execute(cmd)
 
 
@@ -173,7 +173,7 @@ def tpasswd(keyfile, newpassphrase, oldpassphrase):
     """
     Change current passphrase from keyfile
     """
-    cmd = ' '.join(['tomb',
+    cmd = ['tomb',
         'passwd',
         '-k',
         keyfile,
@@ -182,7 +182,7 @@ def tpasswd(keyfile, newpassphrase, oldpassphrase):
         sanitize_passphrase(newpassphrase),
         '--tomb-old-pwd',
         sanitize_passphrase(oldpassphrase),
-        '--no-color'])
+        '--no-color']
     return execute(cmd)
 
 
@@ -191,7 +191,7 @@ def tsetkey(oldkeyfile, tombfile, newkeyfile, newpassphrase, oldpassphrase):
     Change lock key for a tomb
     The old key+passphrase and new key+passphrase are needed
     """
-    cmd = ' '.join(['tomb',
+    cmd = ['tomb',
         'setkey',
         '-k',
         newkeyfile,
@@ -202,7 +202,7 @@ def tsetkey(oldkeyfile, tombfile, newkeyfile, newpassphrase, oldpassphrase):
         sanitize_passphrase(newpassphrase),
         '--tomb-pwd',
         sanitize_passphrase(oldpassphrase),
-        '--no-color'])
+        '--no-color']
     return execute(cmd)
 
 
@@ -210,5 +210,5 @@ def tslam():
     """
     Slam tombs, killing all programs using it
     """
-    cmd = ' '.join(['tomb', 'slam'])
+    cmd = ['tomb', 'slam']
     return execute(cmd)
